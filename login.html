@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <img src="./images/s.png" alt="" style="width: 17rem;">
+            <form class="form" id="loginForm">
+                <input type="email" class="input" id="email" placeholder="Email" required>
+                <input type="password" class="input" id="password" placeholder="Password" required>
+                <p class="page-link">
+                    <span class="page-link-label">Forgot Password?</span>
+                </p>
+                <button type="submit" class="form-btn">Log in</button>
+            </form>
+            <div id="errorMessage" style="color: red; display: none; text-align: center;">
+                Incorrect email or password.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container px-lg-5">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a class="border-bottom" href="#"></a> All Right
+                    Reserved. Designed By
+                    <a class="border-bottom" href="#">Dinero's Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <script>
+        // Predefined credentials
+        const correctEmail = "dinero@gmail.com"; // Your correct email
+        const correctPassword = "allowme"; // Your correct password
+
+        // Handle form submission
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const emailInput = document.getElementById("email").value;
+            const passwordInput = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Check if the entered email and password are correct
+            if (emailInput === correctEmail && passwordInput === correctPassword) {
+                // Redirect to the next page if credentials are correct
+                window.location.href = "index.html"; // Change to your target page
+            } else {
+                // Show error message if credentials are incorrect
+                errorMessage.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
