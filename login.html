@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container" style="height: 28rem;">
+            <img src="./images/s.png" alt="" style="width: 17rem;">
+            <form class="form" id="loginForm">
+                <!-- Added Labels for Accessibility -->
+                <label for="email" class="visually-hidden">Email</label>
+                <input type="email" class="input" id="email" placeholder="Email" required>
+
+                <label for="password" class="visually-hidden">Password</label>
+                <input type="password" class="input" id="password" placeholder="Password" required>
+
+                <!-- Show Password Checkbox -->
+                <div>
+                    <input type="checkbox" id="showPassword"> <label for="showPassword">Show Password</label>
+                </div>
+
+                <p class="page-link">
+                    <span class="page-link-label">Forgot Password?</span>
+                </p>
+
+                <button type="submit" class="form-btn">Log in</button>
+            </form>
+
+            <!-- Error Message -->
+            <div id="errorMessage" style="color: red; display: none; text-align: center;">
+                Incorrect email or password.
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container px-lg-5">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; All Right Reserved. Designed By
+                    <a class="border-bottom" href="#">Dinero's Code</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <script>
+        // Predefined list of users with email, password, and redirect URL
+        const users = [
+            { email: "dinero@gmail.com", password: "allowme", redirectURL: "client.html" },
+            { email: "user1@gmail.com", password: "allowme1", redirectURL: "deposit.html" },
+            { email: "user2@gmail.com", password: "allowme2", redirectURL: "contact.html" }
+        ];
+
+        // Handle form submission
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const emailInput = document.getElementById("email").value;
+            const passwordInput = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Check if any user in the list has the entered email and password
+            const user = users.find(user => user.email === emailInput && user.password === passwordInput);
+
+            if (user) {
+                // Redirect to the appropriate URL based on the user's redirectURL
+                window.location.href = user.redirectURL; // Redirect to user-specific page
+            } else {
+                // Show error message if credentials are incorrect
+                errorMessage.style.display = "block";
+            }
+        });
+
+        // Clear the error message when the user starts typing again
+        document.getElementById("email").addEventListener("input", function() {
+            document.getElementById("errorMessage").style.display = "none";
+        });
+
+        document.getElementById("password").addEventListener("input", function() {
+            document.getElementById("errorMessage").style.display = "none";
+        });
+
+        // Show password toggle functionality
+        document.getElementById("showPassword").addEventListener("change", function() {
+            const passwordField = document.getElementById("password");
+            if (this.checked) {
+                passwordField.type = "text"; // Show the password
+            } else {
+                passwordField.type = "password"; // Hide the password
+            }
+        });
+    </script>
+</body>
+
+</html>
